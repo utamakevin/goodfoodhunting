@@ -1,0 +1,25 @@
+body {
+    background-color: mistyrose;
+}
+
+/* img {
+    width: 200px;
+    aspect-ratio: 1/1;
+} */
+
+.dishes {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    width: 80%;
+    margin: auto;
+}
+
+.ui-card {
+    background-color: floralwhite;
+    width: 200px;
+}
+
+.ui-card img {
+    width: 100%;
+    aspect-ratio: 1/1;
+}
