@@ -2,11 +2,11 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcrypt')
 const pool = require('./../db')
-const { render } = require('ejs')
-const { route } = require('./dish_controller')
+// const { render } = require('ejs')
+// const { route } = require('./dish_controller')
 
 
-router.get('/login', (req,res) => {
+router.get('/login', (req, res) => {
     res.render('login')
 })
 
@@ -19,7 +19,7 @@ router.post('/signup/new', (req, res) => {
 
     pool.query(sql, [req.params.email], (err, dbRes) => {
         if(dbRes.rows === undefined) {
-            redirect('/signup')
+            redirect('/signup/register')
         } else {
             res.render('email_found')
         }
@@ -30,7 +30,7 @@ router.get('/password-reset', (req, res) => {
     res.render('password_reset')
 })
 
-router.post('/signup', (req, res) => {
+router.post('/signup/register', (req, res) => {
     const email = req.body.email
     const plainTextPassword = req.body.password
 
