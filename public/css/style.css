@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     background-color: mistyrose;
 }
@@ -7,15 +11,23 @@ body {
     aspect-ratio: 1/1;
 } */
 
-.dishes {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    width: 80%;
+.main_wrapper {
+    width: fit-content;
     margin: auto;
 }
 
+.dishes {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 5px;
+}
+
+.dishes h2 {
+    margin: 10px;
+}
+
 .ui-card {
-    background-color: floralwhite;
+    background-color: gainsboro;
     width: 200px;
 }
 

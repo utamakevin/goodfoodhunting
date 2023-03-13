@@ -10,6 +10,48 @@ router.get('/login', (req,res) => {
     res.render('login')
 })
 
+router.get('/signup', (req, res) => {
+    res.render('signup')
+})
+
+router.post('/signup/new', (req, res) => {
+    const sql = `SELECT * FROM users WHERE email = $1;`
+
+    pool.query(sql, [req.params.email], (err, dbRes) => {
+        if(dbRes.rows === undefined) {
+            redirect('/signup')
+        } else {
+            res.render('email_found')
+        }
+    })
+})
+
+router.get('/password-reset', (req, res) => {
+    res.render('password_reset')
+})
+
+router.post('/signup', (req, res) => {
+    const email = req.body.email
+    const plainTextPassword = req.body.password
+
+    bcrypt.genSalt(10, (err, salt) => {
+
+        bcrypt.hash(plainTextPassword, salt, (err, digestedPassword) => {
+            // the digested password is what we want to save in db
+            
+            const sql = `
+                INSERT INTO users (email, password_digest)
+                VALUES ($1, $2);
+                `
+
+            pool.query(sql, [email, digestedPassword], (err, dbRes) => {
+                console.log(err)
+                res.redirect('/login')
+            })
+        })
+    })
+})
+
 router.post('/sessions', (req, res) => {
 
     // creating a new session - logging in
